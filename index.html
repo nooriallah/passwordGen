@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Password Generator</title>
+
+        <link rel="stylesheet" href="./css/style.css">
+    </head>
+
+    <body>
+        <div class="container">
+            <h1 class="title">Generate a <br> <span>Random Password</span></h1>
+            <div class="input_wrapper">
+                <input type="text" id="inp_password" placeholder="Generated password shown here">
+                <button id="btn_copy" onclick="copyPassword()">Copy</button>
+                <br>
+            </div>
+            <div class="gen_button_wrapper">
+                <button class="btn_generate" onclick="generatePassowrd()">Generate Password</button>
+            </div>
+        </div>
+    </body>
+
+    <script>
+        let inpPassword = document.getElementById("inp_password");
+        let length = 12;
+
+        let upperCase = "ABCDEFJHIGKLMNOPQRSTUVWXYZ";
+        let lowerCase = "abcdefjhigklmnopqrstuvwxyz"
+        let number = "0123456789";
+        let symbol = "!@#$%^&*(){}[]:\\/;',|";
+
+        let allChars = upperCase + lowerCase + number + symbol;
+
+        function generatePassowrd() {
+            let password = "";
+
+            password += upperCase[Math.floor(Math.random() * upperCase.length)];
+            password += lowerCase[Math.floor(Math.random() * lowerCase.length)]
+            password += number[Math.floor(Math.random() * number.length)]
+            password += symbol[Math.floor(Math.random() * symbol.length)]
+
+            while (length > password.length) {
+                password += allChars[Math.floor(Math.random() * allChars.length)]
+
+            }
+            console.log(password);
+
+            inpPassword.value = password
+
+            document.getElementById("btn_copy").innerText = "Copy"
+        }
+
+        function copyPassword() {
+            inpPassword.select();
+            document.execCommand("copy")
+
+            document.getElementById("btn_copy").innerText = "Copied"
+
+            console.log("Text copied");
+        }
+
+        document.execCommand("help")
+    </script>
+
+</html>
